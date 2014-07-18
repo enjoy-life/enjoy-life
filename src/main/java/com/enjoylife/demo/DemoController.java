@@ -25,11 +25,11 @@ import java.util.Date;
 @RequestMapping("/demo")
 public class DemoController {
 
+    // http://localhost:8080/enjoylife/demo/index
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String index(){
         return "index";
     }
-
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(User user, @RequestParam(value = "name") String name){
