@@ -1,4 +1,4 @@
-package com.enjoylife.common.model;
+package com.enjoylife.common.model.poi;
 
 import java.io.Serializable;
 
@@ -6,15 +6,15 @@ import java.io.Serializable;
  * Created with IntelliJ IDEA.
  * Author: liangjun.zhong
  * Date: 14-7-28
- * Time: AM12:52
+ * Time: AM12:57
  * To change this template use File | Settings | File Templates.
  */
-public class City implements Serializable {
-    private static final long serialVersionUID = -197594417945103222L;
+public class District implements Serializable {
+    private static final long serialVersionUID = -5714235128797217707L;
 
     private String id;
     private String name;
-    private Integer dpCityId;
+    private Integer dpDistrictId;
 
     public String getId() {
         return id;
@@ -32,11 +32,11 @@ public class City implements Serializable {
         this.name = name;
     }
 
-    public Integer getDpCityId() {
-        return dpCityId;
+    public Integer getDpDistrictId() {
+        return dpDistrictId;
     }
 
-    public void setDpCityId(Integer dpCityId) {
-        this.dpCityId = dpCityId;
+    public void setDpDistrictId(Integer dpDistrictId) {
+        this.dpDistrictId = dpDistrictId;
     }
 }

@@ -1,4 +1,4 @@
-package com.enjoylife.common.model;
+package com.enjoylife.common.model.poi;
 
 import java.io.Serializable;
 
