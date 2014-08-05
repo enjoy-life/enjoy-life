@@ -1,5 +1,7 @@
 package com.enjoylife.demo;
 
+import java.io.Serializable;
+
 /**
  * Created with IntelliJ IDEA.
  * Author: liangjun.zhong
@@ -7,7 +9,8 @@ package com.enjoylife.demo;
  * Time: PM10:05
  * To change this template use File | Settings | File Templates.
  */
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 3949500216428392695L;
 
     private int userId;
 

@@ -1,5 +1,6 @@
 package com.enjoylife.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
@@ -87,6 +88,15 @@ public class DemoController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
         response.flushBuffer();
         inputStream.close();
+    }
+
+    @Autowired
+    private UserTestDao userTestDao;
+
+    @RequestMapping(value = "/dao/test", method = RequestMethod.GET )
+    public @ResponseBody long daoTest() {
+        long count = userTestDao.count();
+        return count;
     }
 
 
