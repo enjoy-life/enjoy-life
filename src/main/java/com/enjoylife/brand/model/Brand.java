@@ -3,6 +3,7 @@ package com.enjoylife.brand.model;
 import com.enjoylife.common.model.Image;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +18,10 @@ public class Brand implements Serializable {
     private String id;
     private String name;
     private Image logo;
+
+    private Date addTime;
+    private Date updateTime;
+
 
 
     public String getId() {
@@ -41,5 +46,21 @@ public class Brand implements Serializable {
 
     public void setLogo(Image logo) {
         this.logo = logo;
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
