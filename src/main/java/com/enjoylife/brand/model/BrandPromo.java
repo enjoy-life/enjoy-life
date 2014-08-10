@@ -25,6 +25,8 @@ public class BrandPromo implements Serializable {
     private List<String> shopIds;
 
     private boolean effective; // 是否有效
+    private Date addTime;
+    private Date updateTime;
 
     public String getId() {
         return id;
@@ -88,5 +90,21 @@ public class BrandPromo implements Serializable {
 
     public void setEffective(boolean effective) {
         this.effective = effective;
+    }
+
+    public Date getAddTime() {
+        return addTime;
+    }
+
+    public void setAddTime(Date addTime) {
+        this.addTime = addTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
