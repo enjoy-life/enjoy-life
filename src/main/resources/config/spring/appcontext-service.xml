@@ -9,6 +9,13 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
 
+    <bean id="brandService" class="com.enjoylife.brand.service.Impl.BrandServiceImpl">
+        <property name="brandDao" ref="brandDao"/>
+    </bean>
+
+    <bean id="brandPromoService" class="com.enjoylife.brand.service.Impl.BrandPromoServiceImpl">
+        <property name="brandPromoDao" ref="brandPromoDao"/>
+    </bean>
 
 
 

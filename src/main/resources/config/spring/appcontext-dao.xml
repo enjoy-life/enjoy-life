@@ -14,6 +14,14 @@
         <constructor-arg value="enjoylife" />
     </bean>
 
+    <bean id="brandDao" class="com.enjoylife.brand.dao.BrandDao">
+        <constructor-arg ref="jongo" />
+    </bean>
+
+    <bean id="brandPromoDao" class="com.enjoylife.brand.dao.BrandPromoDao">
+        <constructor-arg ref="jongo" />
+    </bean>
+
 
 
 

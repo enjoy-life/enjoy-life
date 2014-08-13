@@ -1,6 +1,7 @@
 package com.enjoylife.brand.entity;
 
 import com.enjoylife.brand.model.Brand;
+import com.enjoylife.common.entity.Entity;
 import org.bson.types.ObjectId;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Date;
  * Time: PM11:09
  * To change this template use File | Settings | File Templates.
  */
-public class BrandEntity extends Brand {
+public class BrandEntity extends Brand implements Entity {
     private static final long serialVersionUID = 8735920785610348005L;
 
     private ObjectId _id;

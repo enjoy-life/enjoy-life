@@ -1,6 +1,7 @@
 package com.enjoylife.brand.entity;
 
 import com.enjoylife.brand.model.BrandPromo;
+import com.enjoylife.common.entity.Entity;
 import org.bson.types.ObjectId;
 
 /**
@@ -10,7 +11,7 @@ import org.bson.types.ObjectId;
  * Time: AM10:29
  * To change this template use File | Settings | File Templates.
  */
-public class BrandPromoEntity extends BrandPromo {
+public class BrandPromoEntity extends BrandPromo implements Entity {
     private static final long serialVersionUID = -6897674742355878905L;
 
     private ObjectId _id;

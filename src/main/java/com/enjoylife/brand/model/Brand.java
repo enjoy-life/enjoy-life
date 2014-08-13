@@ -1,9 +1,7 @@
 package com.enjoylife.brand.model;
 
 import com.enjoylife.common.model.Image;
-
-import java.io.Serializable;
-import java.util.Date;
+import com.enjoylife.common.model.Model;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,25 +10,12 @@ import java.util.Date;
  * Time: PM4:00
  * To change this template use File | Settings | File Templates.
  */
-public class Brand implements Serializable {
+public class Brand extends Model {
     private static final long serialVersionUID = -2645850739446640435L;
 
-    private String id;
     private String name;
     private Image logo;
 
-    private Date addTime;
-    private Date updateTime;
-
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -48,19 +33,4 @@ public class Brand implements Serializable {
         this.logo = logo;
     }
 
-    public Date getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(Date addTime) {
-        this.addTime = addTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 }

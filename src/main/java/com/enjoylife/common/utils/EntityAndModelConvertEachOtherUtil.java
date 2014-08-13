@@ -1,5 +1,7 @@
 package com.enjoylife.common.utils;
 
+import com.enjoylife.common.entity.Entity;
+import com.enjoylife.common.model.Model;
 import com.enjoylife.common.model.Page;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -57,6 +59,13 @@ public class EntityAndModelConvertEachOtherUtil {
             return null;
         }
         BeanUtils.copyProperties(entity, model);
+        try {
+            Model m = (Model) model;
+            Entity e = (Entity) entity;
+            m.setId(e.get_id().toString());
+        } catch (Exception e) {
+            logger.error(e);
+        }
         return model;
     }
 
