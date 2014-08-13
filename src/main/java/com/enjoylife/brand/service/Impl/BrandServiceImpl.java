@@ -5,6 +5,7 @@ import com.enjoylife.brand.entity.BrandEntity;
 import com.enjoylife.brand.model.Brand;
 import com.enjoylife.brand.service.BrandService;
 import com.enjoylife.common.utils.EntityAndModelConvertEachOtherUtil;
+import com.enjoylife.common.utils.ObjectIdUtils;
 import com.enjoylife.common.utils.StringUtils;
 import org.bson.types.ObjectId;
 import org.springframework.util.CollectionUtils;
@@ -36,10 +37,7 @@ public class BrandServiceImpl implements BrandService {
     public List<Brand> getBrands(List<String> brandIds) {
         if (CollectionUtils.isEmpty(brandIds))
             return null;
-        List<ObjectId> objectIds = new ArrayList<ObjectId>();
-        for (String brandId : brandIds) {
-            objectIds.add(new ObjectId(brandId));
-        }
+        List<ObjectId> objectIds = ObjectIdUtils.convertToObjectIds(brandIds);
         List<BrandEntity> brandEntityList = brandDao.find("{_id:{$in:#}}", objectIds);
         return EntityAndModelConvertEachOtherUtil.fromEntityToModel(brandEntityList, Brand.class);
     }
