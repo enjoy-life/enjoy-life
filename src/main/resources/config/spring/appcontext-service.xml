@@ -15,6 +15,7 @@
 
     <bean id="brandPromoService" class="com.enjoylife.brand.service.Impl.BrandPromoServiceImpl">
         <property name="brandPromoDao" ref="brandPromoDao"/>
+        <property name="brandService" ref="brandService"/>
     </bean>
 
 

@@ -7,7 +7,7 @@ import com.enjoylife.brand.model.vo.BasicBrandPromo;
 import com.enjoylife.brand.service.BrandPromoService;
 import com.enjoylife.brand.service.BrandService;
 import com.enjoylife.common.model.Page;
-import com.enjoylife.common.utils.EntityAndModelConvertEachOtherUtil;
+import com.enjoylife.common.utils.EntityAndModelConvertEachOtherUtils;
 import com.enjoylife.common.utils.PageUtils;
 import com.enjoylife.common.utils.StringUtils;
 import org.springframework.util.CollectionUtils;
@@ -61,7 +61,7 @@ public class BrandPromoServiceImpl implements BrandPromoService {
     private List<BasicBrandPromo> convertToBasicBrandPromoList(List<BrandPromoEntity> brandPromoEntityList) {
         if (CollectionUtils.isEmpty(brandPromoEntityList))
             return null;
-        List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo =  EntityAndModelConvertEachOtherUtil.fromEntityToModel(brandPromoEntityList, BasicBrandPromo.class);
+        List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo =  EntityAndModelConvertEachOtherUtils.fromEntityToModel(brandPromoEntityList, BasicBrandPromo.class);
         List<BasicBrandPromo> basicBrandPromoList = enrichBrandInfo(basicBrandPromoList_withoutBrandInfo);
         return basicBrandPromoList;
     }

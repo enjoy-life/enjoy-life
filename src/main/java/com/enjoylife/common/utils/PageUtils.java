@@ -24,4 +24,12 @@ public class PageUtils {
         return page;
     }
 
+    public static boolean isValid(int pageNo, int pageSize) {
+        if ( pageNo<0 || pageSize>100 ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }

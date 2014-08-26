@@ -17,14 +17,14 @@ import java.util.List;
  * Time: PM11:24
  * To change this template use File | Settings | File Templates.
  */
-public class EntityAndModelConvertEachOtherUtil {
+public class EntityAndModelConvertEachOtherUtils {
 
-    private static final Logger logger = Logger.getLogger(EntityAndModelConvertEachOtherUtil.class);
+    private static final Logger logger = Logger.getLogger(EntityAndModelConvertEachOtherUtils.class);
 
     public static Object fromModelToEntity(Object model, Class entityClazz){
         if(model==null || entityClazz==null)
             return null;
-        Object entity = null;
+        Object entity;
         try {
             entity = entityClazz.newInstance();
         } catch (Exception e) {
