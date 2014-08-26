@@ -2,15 +2,20 @@ package com.enjoylife.brand.service.Impl;
 
 import com.enjoylife.brand.dao.BrandPromoDao;
 import com.enjoylife.brand.entity.BrandPromoEntity;
+import com.enjoylife.brand.model.Brand;
 import com.enjoylife.brand.model.vo.BasicBrandPromo;
 import com.enjoylife.brand.service.BrandPromoService;
+import com.enjoylife.brand.service.BrandService;
 import com.enjoylife.common.model.Page;
 import com.enjoylife.common.utils.EntityAndModelConvertEachOtherUtil;
+import com.enjoylife.common.utils.PageUtils;
 import com.enjoylife.common.utils.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,24 +27,17 @@ import java.util.List;
 public class BrandPromoServiceImpl implements BrandPromoService {
 
     private BrandPromoDao brandPromoDao;
+    private BrandService brandService;
 
     @Override
     public Page<BasicBrandPromo> paginateBasicBrandPromos(String cityId, int pageNo, int pageSize) {
         if (StringUtils.isEmpty(cityId) || pageNo<=0 || pageNo<=0 )
             return null;
-
         Page<BrandPromoEntity> brandPromoEntityPage = brandPromoDao.paginate(pageNo, pageSize, "{cityId:#}", cityId);
-        if (brandPromoEntityPage == null || CollectionUtils.isEmpty(brandPromoEntityPage.getRecords()))
-            return null;
-
-        List<BrandPromoEntity> brandPromoEntityList = brandPromoEntityPage.getRecords();
-        List<BasicBrandPromo> basicBrandPromoList =  EntityAndModelConvertEachOtherUtil.fromEntityToModel(brandPromoEntityList, BasicBrandPromo.class);
-        List<String> brandIds = new ArrayList<String>();
-        for (BasicBrandPromo basicBrandPromo : basicBrandPromoList) {
-            brandIds.add(basicBrandPromo.getId());
-        }
-
-        return null;
+        List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo = convertToBasicBrandPromoList(brandPromoEntityPage);
+        List<BasicBrandPromo> basicBrandPromoList = enrichBrandInfo(basicBrandPromoList_withoutBrandInfo);
+        Page result = PageUtils.convertToPage(pageNo, pageSize, basicBrandPromoList);
+        return result;
     }
 
     @Override
@@ -51,7 +49,46 @@ public class BrandPromoServiceImpl implements BrandPromoService {
         return null;
     }
 
+    private List<BasicBrandPromo> convertToBasicBrandPromoList(Page<BrandPromoEntity> brandPromoEntityPage) {
+        if (brandPromoEntityPage == null || CollectionUtils.isEmpty(brandPromoEntityPage.getRecords()))
+            return null;
+        List<BrandPromoEntity> brandPromoEntityList = brandPromoEntityPage.getRecords();
+        List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo =  EntityAndModelConvertEachOtherUtil.fromEntityToModel(brandPromoEntityList, BasicBrandPromo.class);
+        return basicBrandPromoList_withoutBrandInfo;
+    }
+
+    private List<BasicBrandPromo> enrichBrandInfo(List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo) {
+        if (CollectionUtils.isEmpty(basicBrandPromoList_withoutBrandInfo))
+            return null;
+        List<String> brandIds = new ArrayList<String>();
+        for (BasicBrandPromo basicBrandPromo : basicBrandPromoList_withoutBrandInfo) {
+            brandIds.add(basicBrandPromo.getBrandId());
+        }
+        List<Brand> brands = brandService.getBrands(brandIds);
+        if (CollectionUtils.isEmpty(brands))
+            return null;
+        Map<String, Brand> brandMap = new HashMap<String, Brand>();
+        for (Brand brand : brands) {
+            brandMap.put(brand.getId(), brand);
+        }
+        List<BasicBrandPromo> basicBrandPromoList = new ArrayList<BasicBrandPromo>();
+        for (BasicBrandPromo basicBrandPromo : basicBrandPromoList_withoutBrandInfo) {
+            Brand brand = brandMap.get(basicBrandPromo.getBrandId());
+            if (brand!=null) {
+                basicBrandPromo.setBrand(brand);
+                basicBrandPromoList.add(basicBrandPromo);
+            }
+        }
+        return basicBrandPromoList;
+    }
+
+
+
     public void setBrandPromoDao(BrandPromoDao brandPromoDao) {
         this.brandPromoDao = brandPromoDao;
+    }
+
+    public void setBrandService(BrandService brandService) {
+        this.brandService = brandService;
     }
 }

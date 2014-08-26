@@ -20,6 +20,7 @@ public class BasicBrandPromo implements Serializable {
     private String title;
     private Date beginTime;
     private Date endTime;
+    private String brandId;
     private Brand brand;
 
 
@@ -61,5 +62,13 @@ public class BasicBrandPromo implements Serializable {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
     }
 }
