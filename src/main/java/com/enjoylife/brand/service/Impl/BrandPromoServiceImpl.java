@@ -34,27 +34,36 @@ public class BrandPromoServiceImpl implements BrandPromoService {
         if (StringUtils.isEmpty(cityId) || pageNo<=0 || pageNo<=0 )
             return null;
         Page<BrandPromoEntity> brandPromoEntityPage = brandPromoDao.paginate(pageNo, pageSize, "{cityId:#}", cityId);
-        List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo = convertToBasicBrandPromoList(brandPromoEntityPage);
-        List<BasicBrandPromo> basicBrandPromoList = enrichBrandInfo(basicBrandPromoList_withoutBrandInfo);
-        Page result = PageUtils.convertToPage(pageNo, pageSize, basicBrandPromoList);
-        return result;
+        return convertToBasicBrandPromoPage(brandPromoEntityPage);
     }
 
     @Override
     public Page<BasicBrandPromo> paginateBasicBrandPromos(String cityId, String districtId, int pageNo, int pageSize) {
         if (StringUtils.isEmpty(cityId) || StringUtils.isEmpty(districtId) || pageNo<=0 || pageNo<=0 )
             return null;
-
-
-        return null;
+        Page<BrandPromoEntity> brandPromoEntityPage = brandPromoDao.paginate(pageNo, pageSize, "{cityId:#, districtId:#}", cityId, districtId);
+        return convertToBasicBrandPromoPage(brandPromoEntityPage);
     }
 
-    private List<BasicBrandPromo> convertToBasicBrandPromoList(Page<BrandPromoEntity> brandPromoEntityPage) {
+
+
+    private Page<BasicBrandPromo> convertToBasicBrandPromoPage(Page<BrandPromoEntity> brandPromoEntityPage) {
         if (brandPromoEntityPage == null || CollectionUtils.isEmpty(brandPromoEntityPage.getRecords()))
             return null;
+        int pageNo = brandPromoEntityPage.getPageNo();
+        int pageSize = brandPromoEntityPage.getPageSize();
         List<BrandPromoEntity> brandPromoEntityList = brandPromoEntityPage.getRecords();
+        List<BasicBrandPromo> basicBrandPromoList = convertToBasicBrandPromoList(brandPromoEntityList);
+        Page result = PageUtils.convertToPage(pageNo, pageSize, basicBrandPromoList);
+        return result;
+    }
+
+    private List<BasicBrandPromo> convertToBasicBrandPromoList(List<BrandPromoEntity> brandPromoEntityList) {
+        if (CollectionUtils.isEmpty(brandPromoEntityList))
+            return null;
         List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo =  EntityAndModelConvertEachOtherUtil.fromEntityToModel(brandPromoEntityList, BasicBrandPromo.class);
-        return basicBrandPromoList_withoutBrandInfo;
+        List<BasicBrandPromo> basicBrandPromoList = enrichBrandInfo(basicBrandPromoList_withoutBrandInfo);
+        return basicBrandPromoList;
     }
 
     private List<BasicBrandPromo> enrichBrandInfo(List<BasicBrandPromo> basicBrandPromoList_withoutBrandInfo) {
