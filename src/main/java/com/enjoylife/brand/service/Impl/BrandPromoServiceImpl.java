@@ -3,6 +3,7 @@ package com.enjoylife.brand.service.Impl;
 import com.enjoylife.brand.dao.BrandPromoDao;
 import com.enjoylife.brand.entity.BrandPromoEntity;
 import com.enjoylife.brand.model.Brand;
+import com.enjoylife.brand.model.BrandPromo;
 import com.enjoylife.brand.model.vo.BasicBrandPromo;
 import com.enjoylife.brand.service.BrandPromoService;
 import com.enjoylife.brand.service.BrandService;
@@ -12,10 +13,7 @@ import com.enjoylife.common.utils.PageUtils;
 import com.enjoylife.common.utils.StringUtils;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,6 +43,17 @@ public class BrandPromoServiceImpl implements BrandPromoService {
         return convertToBasicBrandPromoPage(brandPromoEntityPage);
     }
 
+    @Override
+    public String addBrandPromo(BrandPromo brandPromo) {
+        if (brandPromo==null)
+            return null;
+        BrandPromoEntity brandPromoEntity = (BrandPromoEntity) EntityAndModelConvertEachOtherUtils.fromModelToEntity(brandPromo, BrandPromoEntity.class);
+        Date now = new Date();
+        brandPromoEntity.setAddTime(now);
+        brandPromoEntity.setUpdateTime(now);
+        brandPromoDao.save(brandPromoEntity);
+        return brandPromoEntity.get_id().toString();
+    }
 
 
     private Page<BasicBrandPromo> convertToBasicBrandPromoPage(Page<BrandPromoEntity> brandPromoEntityPage) {

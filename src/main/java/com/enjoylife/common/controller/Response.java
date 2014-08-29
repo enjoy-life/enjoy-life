@@ -28,11 +28,6 @@ public class Response<T> implements Serializable {
         this.msg = msg;
     }
 
-    public Response(Code code, T content) {
-        this.code = code.value;
-        this.content = content;
-    }
-
     public Response(Code code, String msg, T content) {
         this.code = code.value;
         this.msg = msg;
