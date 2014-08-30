@@ -1,6 +1,7 @@
 package com.enjoylife.common.model.poi;
 
-import java.io.Serializable;
+import com.enjoylife.common.model.Model;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,20 +10,11 @@ import java.io.Serializable;
  * Time: AM1:01
  * To change this template use File | Settings | File Templates.
  */
-public class Category implements Serializable {
+public class Category extends Model {
     private static final long serialVersionUID = -7523233822898660199L;
 
-    private String id;
     private String name;
     private Integer dpCategoryId;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

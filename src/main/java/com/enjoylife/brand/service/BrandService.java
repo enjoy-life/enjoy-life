@@ -17,6 +17,6 @@ public interface BrandService {
 
     public List<Brand> getBrands(List<String> brandIds);
 
-    public void addBrand(Brand brand);
+    public String addBrand(Brand brand);
 
 }

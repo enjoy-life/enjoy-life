@@ -18,6 +18,10 @@
         <property name="brandService" ref="brandService"/>
     </bean>
 
+    <bean id="cityService" class="com.enjoylife.common.model.poi.service.Impl.CityServiceImpl">
+        <property name="cityDao" ref="cityDao"/>
+    </bean>
+
 
 
 

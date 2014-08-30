@@ -42,11 +42,12 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public void addBrand(Brand brand) {
+    public String addBrand(Brand brand) {
         if (brand==null)
-            return;
+            return null;
         BrandEntity brandEntity = (BrandEntity) EntityAndModelConvertEachOtherUtils.fromModelToEntity(brand, BrandEntity.class);
         brandDao.save(brandEntity);
+        return brandEntity.get_id().toString();
     }
 
     public void setBrandDao(BrandDao brandDao) {

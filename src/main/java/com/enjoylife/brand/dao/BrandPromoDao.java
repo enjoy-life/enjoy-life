@@ -1,6 +1,7 @@
 package com.enjoylife.brand.dao;
 
 import com.enjoylife.brand.entity.BrandPromoEntity;
+import com.enjoylife.common.db.mongo.CollectionName;
 import com.enjoylife.common.db.mongo.GenericDao;
 import org.jongo.Jongo;
 
@@ -14,7 +15,7 @@ import org.jongo.Jongo;
 public class BrandPromoDao extends GenericDao<BrandPromoEntity> {
 
     public BrandPromoDao(Jongo jongo) {
-        super("BrandPromo", BrandPromoEntity.class, jongo);
+        super(CollectionName.BrandPromo, BrandPromoEntity.class, jongo);
     }
 
 }

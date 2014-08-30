@@ -22,6 +22,14 @@
         <constructor-arg ref="jongo" />
     </bean>
 
+    <bean id="cityDao" class="com.enjoylife.common.model.poi.dao.CityDao">
+        <constructor-arg ref="jongo" />
+    </bean>
+
+    <bean id="districtDao" class="com.enjoylife.common.model.poi.dao.DistrictDao">
+        <constructor-arg ref="jongo" />
+    </bean>
+
 
 
 

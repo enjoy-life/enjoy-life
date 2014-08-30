@@ -51,7 +51,7 @@ public class EntityAndModelConvertEachOtherUtils {
     public static Object fromEntityToModel(Object entity, Class modelClazz){
         if(entity==null || modelClazz==null)
             return null;
-        Object model = null;
+        Object model;
         try{
             model = modelClazz.newInstance();
         }catch (Exception e){
