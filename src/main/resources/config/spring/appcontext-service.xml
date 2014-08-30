@@ -22,6 +22,10 @@
         <property name="cityDao" ref="cityDao"/>
     </bean>
 
+    <bean id="districtService" class="com.enjoylife.common.model.poi.service.Impl.DistrictServiceImpl">
+        <property name="districtDao" ref="districtDao"/>
+    </bean>
+
 
 
 
