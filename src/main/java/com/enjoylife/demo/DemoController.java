@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,6 +89,11 @@ public class DemoController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
         response.flushBuffer();
         inputStream.close();
+    }
+
+    @RequestMapping(value = "/reqandres", method = RequestMethod.GET )
+    public String testReqAndRes(HttpServletRequest request,  HttpServletResponse response) {
+        return "index";
     }
 
     @Autowired
