@@ -10,10 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Date;
 
 /**
@@ -94,6 +96,43 @@ public class DemoController {
     @RequestMapping(value = "/reqandres", method = RequestMethod.GET )
     public String testReqAndRes(HttpServletRequest request,  HttpServletResponse response) {
         return "index";
+    }
+
+    @RequestMapping(value = "/chunked", method = RequestMethod.GET )
+    public void testChunked(HttpServletResponse response) throws Exception {
+        String firstPart = "<html>\n" +
+                "    <head>\n" +
+                "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n" +
+                "        <script src=\"/js/lib/jquery-min.js\"></script>\n" +
+                "    </head>\n" +
+                "    <body>\n" +
+                "\n" +
+                "        <h2>this part is rendered at first time</h2>\n" +
+                "\n" +
+                "        <div id=\"J_chunked\">\n" +
+                "            <!-- <h2>this part is rendered secondary and is responded by chunked</h2> -->\n" +
+                "        </div>";
+
+        String secondPart = "<script type=\"text/javascript\">\n" +
+                "            console.log(\"get chunked response\");\n" +
+                "            $(\"#J_chunked\").html(\"<h2>this part is rendered secondary and is responded by chunked</h2>\");\n" +
+                "        </script>";
+
+        String theEnd = "</body>\n" +
+                "</html>";
+
+        //response.setHeader("Transfer-Encoding", "chunked");
+        PrintWriter writer = response.getWriter();
+        //ServletOutputStream writer = response.getOutputStream();
+        writer.print(firstPart);
+        response.flushBuffer();
+        Thread.sleep(2000);
+        writer.print(secondPart);
+        response.flushBuffer();
+        Thread.sleep(5000);
+        writer.print(theEnd);
+        response.flushBuffer();
+
     }
 
     @Autowired
